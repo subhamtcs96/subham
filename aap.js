@@ -8,7 +8,7 @@ app.use(express.static("public"));
 app.get("/",function(req,res){
   res.sendFile(__dirname+"/index1.html")
 });
-app.listen(3000,function(req,res){
+app.listen(process.env.PORT || 3000,function(req,res){
   console.log("server started on port 3000");
 });
 app.post("/signup",function(req,res){
