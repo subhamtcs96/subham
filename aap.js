@@ -6,13 +6,30 @@ const request = require("request");
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.static("public"));
 app.get("/",function(req,res){
-  res.sendFile(__dirname+"/index1.html")
+  res.sendFile(__dirname+"/index.html")
 });
 app.listen(process.env.PORT || 3000,function(req,res){
   console.log("server started on port 3000");
 });
 app.post("/signup",function(req,res){
   res.sendFile(__dirname+"/signup.html")
+});
+
+app.post("/about",function(req,res){
+  res.sendFile(__dirname+"/")
+});
+app.post("/images",function(req,res){
+  res.sendFile(__dirname+"/")
+});
+app.post("/signin",function(req,res){
+  res.sendFile(__dirname+"/")
+});
+
+app.post("/contact",function(req,res){
+  res.sendFile(__dirname+"/")
+});
+app.post("/mail",function(req,res){
+  res.sendFile(__dirname+"/")
 });
 
 app.post("/",function(req, res){
