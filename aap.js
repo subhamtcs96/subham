@@ -3,6 +3,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const https = require("https");
 const request = require("request");
+const mongoose =require("mongoose");
+app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.static("public"));
 app.get("/",function(req,res){
@@ -11,12 +13,31 @@ app.get("/",function(req,res){
 app.listen(process.env.PORT || 3000,function(req,res){
   console.log("server started on port 3000");
 });
+mongoose.connect("mongodb+srv://admin-subham:Subham123@cluster0.pemkw.mongodb.net/signupDb",{useNewUrlParser:true});
+const signupSchema ={
+Fname:String,
+Lname:String,
+Emailid:String
+}
+const Data = mongoose.model("Data",signupSchema);
+
+
 app.post("/signup",function(req,res){
+  const firstName = req.body.fName;
+  const lastName = req.body.lName;
+  const email = req.body.email;
+
+  const data = new Data({
+    Fname:firstName,
+    Lname:lastName,
+    Emailid:email
+  });
+  data.save();
   res.sendFile(__dirname+"/signup.html")
 });
 
 app.post("/about",function(req,res){
-  res.sendFile(__dirname+"/")
+  res.sendFile(__dirname+"/about.html")
 });
 app.post("/images",function(req,res){
   res.sendFile(__dirname+"/")
